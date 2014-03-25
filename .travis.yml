@@ -1,13 +1,12 @@
+language: node_js
+node_js:
+  - '0.10'
+
 before_install:
   - cd ../
-  - git clone git@github.com:HabitRPG/habitrpg.git
+  - git clone git://github.com:HabitRPG/habitrpg.git
   - cd habitrpg
   - npm install
   - cp config.json.example config.json
   - ./node_modules/.bin/grunt run:dev
   - cd ../
-
-language: node_js
-node_js:
-  - '0.10'
-
