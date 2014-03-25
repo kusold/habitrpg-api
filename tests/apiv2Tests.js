@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var expect = require('chai').expect;
 var HabitRPG = require('../lib/apiv2.js');
 var Config = require('../config');
@@ -77,12 +78,86 @@ describe('HabitRPG API V2 Tests', function() {
   it("gets a member's foo");
 
   describe("User API", function() {
-    it("posts a user's task score");
-    it("gets all user's tasks");
-    it("posts a new task to create");
-    it("gets an individual task");
-    it("puts a user's task to update");
-    it("deletes a task");
+    var taskId = null;
+
+    it("posts a new task to create", function(done) {
+      var task = {
+        text: 'Test Task',
+        notes: 'Notes for Task',
+        type: 'todo'
+      }
+
+      api.user.createTask(task, function(error, res) {
+        expect(error).to.not.exist;
+        expect(res).to.exist;
+        expect(res.statusCode).to.equal(200);
+        expect(res.body).to.have.property('text').to.equal('Test Task');
+        expect(res.body).to.have.property('notes').to.equal('Notes for Task');
+        expect(res.body).to.have.property('type').to.equal('todo');
+        taskId = res.body._id;
+        done();
+      });
+    });
+
+    it("gets an individual task", function(done) {
+      api.user.getTask(taskId, function(error, res) {
+        expect(error).to.not.exist;
+        expect(res).to.exist;
+        expect(res.statusCode).to.equal(200);
+        expect(res.body).to.have.property('text').and.to.equal('Test Task');
+        expect(res.body).to.have.property('notes').and.to.equal('Notes for Task');
+        expect(res.body).to.have.property('type').and.to.equal('todo');
+        expect(res.body).to.have.property('value').and.to.equal(0)
+        done();
+      });
+    });
+
+    it("gets all user's tasks", function(done) {
+      api.user.getTasks(function(error, res) {
+        expect(error).to.not.exist;
+        expect(res).to.have.property('statusCode').and.to.equal(200);
+        expect(res.body).to.not.be.empty;
+        var task = _.where(res.body,{'id': taskId});
+        expect(task).to.have.length.of.at.least(1);
+        done();
+      });
+    });
+
+    it("posts an increase or decrease to user's task score", function(done) {
+      var increment = true;
+      api.user.updateTaskScore(taskId, increment, function(error, res) {
+        expect(error).to.not.exist;
+        expect(res).to.have.property('statusCode').and.to.equal(200);
+        expect(res.body).to.have.property('delta').and.to.equal(1);
+
+        api.user.getTask(taskId, function(error, res) {
+          expect(res.body).to.have.property('value').to.equal(1);
+          done();
+        });
+      });
+    });
+
+    it("puts a user's task to update", function(done) {
+      var task = {text: 'Test Task Updated'}
+      api.user.updateTask(taskId, task, function(error, res) {
+        expect(error).to.not.exist;
+        expect(res).to.exist;
+        expect(res.statusCode).to.equal(200);
+        expect(res.body).to.have.property('text').to.equal('Test Task Updated');
+        expect(res.body).to.have.property('notes').to.equal('Notes for Task');
+        expect(res.body).to.have.property('type').to.equal('todo');
+        done();
+      });
+    });
+    it("deletes a task", function(done) {
+        api.user.deleteTask(taskId, function(error, res) {
+          expect(error).to.not.exist;
+          expect(res).to.exist;
+          expect(res.statusCode).to.equal(200);
+          done();
+        });
+    });
+
     it("posts the sort order of tasks");
     it("posts to clear completed tasks");
     it("posts to unlink a task from its challenge");
