@@ -1,14 +1,17 @@
 var expect = require('chai').expect;
 var HabitRPG = require('../lib/apiv2.js');
-var config = require('../config.js')
+var Config = require('../config');
+var apiConfig = Config.apiSettings;
+var config = Config.config;
+var apiUrl = Config.apiHostUrl(config);
 
 describe('HabitRPG API V2 Tests', function() {
   var api = null;
 
   before(function(done) {
-    expect(config.apiKey).to.exist.and.to.not.be.empty;
-    expect(config.userId).to.exist.and.to.not.be.empty;
-    api = new HabitRPG(config.userId, config.apiKey)
+    expect(apiConfig.apiKey).to.exist.and.to.not.be.empty;
+    expect(apiConfig.userId).to.exist.and.to.not.be.empty;
+    api = new HabitRPG(apiConfig.userId, apiConfig.apiKey, apiUrl);
     done();
   });
 
