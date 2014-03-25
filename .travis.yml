@@ -5,9 +5,11 @@ services:
   - mongodb
 
 before_install:
+  - npm install -g grunt-cli mocha bower
   - cd ../
   - git clone https://github.com/HabitRPG/habitrpg.git
   - cd habitrpg
+  - bower cache clean; bower update;
   - npm install
   - cp config.json.example config.json
   - ./node_modules/.bin/grunt run:dev &
