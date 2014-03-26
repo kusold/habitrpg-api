@@ -9,7 +9,7 @@ before_install:
   - npm install -g git://github.com/neoziro/bower.git#v1.2.8-patched
   - git clone https://github.com/HabitRPG/habitrpg.git
   - cd habitrpg
-  - bower cache clean; bower update;
+  - bower cache clean | xargs echo; bower update;
   - npm install
   - cp config.json.example config.json
   - npm start &
