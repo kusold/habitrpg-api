@@ -6,10 +6,11 @@ services:
 
 before_install:
   - npm install -g grunt-cli mocha 
-  - npm install -g git://github.com/neoziro/bower.git#v1.2.8-patched
+  - npm install -g bower
   - git clone https://github.com/HabitRPG/habitrpg.git
   - cd habitrpg
-  - bower cache clean | xargs echo; bower update;
+  - bower cache clean --config.interactive=false
+  - bower update --config.interactive=false
   - npm install
   - cp config.json.example config.json
   - npm start &
