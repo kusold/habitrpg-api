@@ -5,7 +5,7 @@ services:
   - mongodb
 
 before_script:
-  - 'npm install -g grunt-cli mocha'
+  - 'npm install -g grunt-cli mocha grunt-karma git-changelog'
   - cd ./node_modules/habitrpg
   - cp config.json.example config.json
   - npm start &
