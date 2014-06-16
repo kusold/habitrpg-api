@@ -5,12 +5,10 @@ services:
   - mongodb
 
 before_install:
-  - npm install -g bower
   - git clone https://github.com/HabitRPG/habitrpg.git
   - cd habitrpg
-  - bower cache clean --config.interactive=false
-  - bower update --config.interactive=false
   - npm install
+  - 'npm install -g grunt-cli mocha'
   - cp config.json.example config.json
   - npm start &
   - node src/seed.js
