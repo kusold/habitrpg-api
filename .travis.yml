@@ -4,12 +4,10 @@ node_js:
 services:
   - mongodb
 
-before_install:
-  - git clone https://github.com/HabitRPG/habitrpg.git
-  - cd habitrpg
-  - npm install
+before_script:
   - 'npm install -g grunt-cli mocha'
+  - cd ./node_modules/habitrpg
   - cp config.json.example config.json
   - npm start &
   - node src/seed.js
-  - cd ../
+  - cd ../../ 
