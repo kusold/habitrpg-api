@@ -21,7 +21,7 @@
     "jshint-stylish": "~0.1.5",
     "gulp-mocha": "~0.4.1",
     "gulp-notify": "~1.2.4",
-    "habitrpg": "git@github.com:HabitRPG/habitrpg.git#develop"
+    "habitrpg": "git://github.com/HabitRPG/habitrpg.git#develop"
   },
   "dependencies": {
     "superagent": "~0.17.0"
