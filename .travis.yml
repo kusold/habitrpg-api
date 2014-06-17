@@ -6,6 +6,5 @@ services:
 
 before_script:
   - 'npm install -g grunt-cli mocha grunt-karma git-changelog'
-  - cd Kusold/habitrpg-api
-  - seedHabitRPGMongo.sh
-  - startHabitRPGServer.sh
+  - ./seedHabitRPGMongo.sh
+  - ./startHabitRPGServer.sh
