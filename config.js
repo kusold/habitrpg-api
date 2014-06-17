@@ -1,6 +1,6 @@
 var apiSettings = {
-  apiKey: 'c27a901d-3a43-4393-8ad4-ec87d9c5530f',
-  userId: '12048ca1-a0f1-4303-baa3-9f863c09787b'
+  apiKey: 'ReplaceThisWithYourAPIToken',
+  userId: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
 };
 
 var config = {

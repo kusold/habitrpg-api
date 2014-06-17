@@ -6,6 +6,8 @@ var apiConfig = Config.apiSettings;
 var config = Config.config;
 var apiUrl = Config.apiHostUrl(config);
 
+/* jshint expr:true */
+
 describe('HabitRPG API V2 Tests', function() {
   var api = null;
 
@@ -85,7 +87,7 @@ describe('HabitRPG API V2 Tests', function() {
         text: 'Test Task',
         notes: 'Notes for Task',
         type: 'todo'
-      }
+      };
 
       api.user.createTask(task, function(error, res) {
         expect(error).to.not.exist;
@@ -132,7 +134,12 @@ describe('HabitRPG API V2 Tests', function() {
 
         api.user.getTask(taskId, function(error, res) {
           expect(res.body).to.have.property('value').to.equal(1);
-          done();
+          api.user.updateTaskScore(taskId, 'down', function(error, res) {
+            expect(error).to.not.exist;
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.delta).to.equal(-0.9747);
+            done();
+          })
         });
       });
     });
