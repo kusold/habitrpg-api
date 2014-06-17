@@ -13,3 +13,4 @@ before_script:
   - node ./src/seed.js
   - popd
   - ./seedHabitRPGMongo.sh
+  - ps aux | grep "node"
