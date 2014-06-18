@@ -23,15 +23,17 @@ new habitapi(userId, apiKey);
 ```
 
 ## User ##
-Gets the full user object
 **GET /user**
+
+Gets the full user object
 ```javascript
 .user.getUser(function(response, error){})
 ```
 
 ### Tasks ###
-Posts a new task to create
 **POST /user/tasks**
+
+Posts a new task to create
 ```javascript
 var task = {
 	text: 'New Task',
@@ -40,20 +42,23 @@ var task = {
 .user.createTask(task, function(response, error){})
 ```
 
-Gets an individual task
 **GET /user/tasks/:id**
+
+Gets an individual task
 ```javascript
 .user.getTask(id, function(response, error){})
 ```
 
-Gets all user tasks
 **GET /user/tasks**
+
+Gets all user tasks
 ```javascript
 .user.getTasks(function(response, error){})
 ```
 
-Puts a users task to update
 **PUT /user/tasks/:id**
+
+Puts a users task to update
 ```javascript
 var task = {
 	text: "Updated text"
@@ -61,22 +66,25 @@ var task = {
 .user.updateTask(id, task, function(response, error){})
 ```
 
-Posts an increase or decrease to a user's task score.
 **POST /user/tasks/:id/:direction**
+
+Posts an increase or decrease to a user's task score.
 ```javascript
 var direction = true // Add to score; false to substract
 .user.updateTaskScore(id, direction, function(response, error){})
 ```
 
-Deletes a task
 **DEL /user/tasks/:id**
+
+Deletes a task
 ```javascript
 .user.deleteTask(id, function(response, error){})
 ```
 
 ### Tags ##
-Posts to create a new tag
 **POST /user/tags**
+
+Posts to create a new tag
 ```javascript
 var tag = {
 	name: 'habitrpg-api'
@@ -84,26 +92,31 @@ var tag = {
 .user.createTag(tag, function(response, error){})
 ```
 
-This REST Endpoint isn't officially supported by HabitRPG. It get's the entire `user` object and parses out just the tag based on name.
 **GET /api/tags/:name**
+
+
+This REST Endpoint isn't officially supported by HabitRPG. It get's the entire `user` object and parses out just the tag based on name.
 ```javascript
 .user.getTagByName(name, function(response, error){})
 ```
 
-This REST Endpoint isn't officially supported by HabitRPG. It get's the entire `user` object and parses out just the tag.
 **GET /api/tags/:id**
+
+This REST Endpoint isn't officially supported by HabitRPG. It get's the entire `user` object and parses out just the tag.
 ```javascript
 .user.getTag(id, function(response, error){})
 ```
 
-This REST Endpoint isn't officially supported by HabitRPG. It get's the entire `user` object and parses out just the tags.
 **GET /api/tags**
+
+This REST Endpoint isn't officially supported by HabitRPG. It get's the entire `user` object and parses out just the tags.
 ```javascript
 .user.getTags(function(response, error){})
 ```
 
-Puts a tag to update it
 **PUT /user/tags/:id**
+
+Puts a tag to update it
 ```javascript
 var tag = {
 	name: 'update-tag'
@@ -111,33 +124,39 @@ var tag = {
 .user.updateTag(id, tag, function(response, error){})
 ```
 
-Deletes a tag
 **DEL /user/tags/:id**
+
+Deletes a tag
 ```javascript
 .user.deleteTag(id, function(response, error){})
 ```
 
 ## Miscellaneous ##
-Currently this doesn't return anything, but it is documented.
+
 **GET /api-docs**
+
+Currently this doesn't return anything, but it is documented.
 ```javascript
 .getApiDocs(function(response, error){})
 ```
 
-Get the API server status to determine if it is up
 **GET /status**
+
+Get the API server status to determine if it is up
 ```javascript
 .getStatus(function(response, error){})
 ```
 
-Gets all available content objects
 **GET /content**
+
+Gets all available content objects
 ```javascript
 .getContent(function(response, error){})
 ```
 
-Gets the user history for export
 **GET /export/history**
+
+Gets the user history for export
 ```javascript
 .getHisory(function(response, error){})
 ```
