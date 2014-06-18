@@ -8,7 +8,7 @@ var codeFiles = ['./*.js', './lib/*.js', './tests/*.js'];
 var jshintReporter = process.env.NODE_ENV === 'test' ? jshint.reporter('jslint_xml') : jshint.reporter(stylish);
 
 function handleError(error) {
-    console.log(error.message)
+  console.log(error.message);
   notify.onError('Error: <%= error.message =>');
   this.emit('end');
 }
