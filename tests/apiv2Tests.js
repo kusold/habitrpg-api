@@ -81,6 +81,7 @@ describe('HabitRPG API V2 Tests', function() {
 
   describe("User API", function() {
     var taskId = null;
+    var tagId = null;
 
     it("posts a new task to create", function(done) {
       var task = {
@@ -174,7 +175,39 @@ describe('HabitRPG API V2 Tests', function() {
     it("posts to feed your pet some food");
     it("posts to equip an item (either pets, mounts, or gear)");
     it("posts to pour a hatching potion on an egg");
-    it("gets the full user object");
+    it("gets the full user object", function (done) {
+      api.user.getUser(function(error, res) {
+	expect(error).to.not.exist
+	expect(res).to.exist
+	expect(res.statusCode).to.equal(200)
+	expect(res.body).to.have.property('rewards').to.be.instanceOf(Array)
+	expect(res.body).to.have.property('todos').to.be.instanceOf(Array)
+	expect(res.body).to.have.property('dailys').to.be.instanceOf(Array)
+	expect(res.body).to.have.property('habits').to.be.instanceOf(Array)
+	expect(res.body).to.have.property('challenges').to.be.instanceOf(Array)
+	expect(res.body).to.have.property('tags').to.be.instanceOf(Array)
+	expect(res.body).to.have.property('stats').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('profile').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('preferences').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('party').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('newMessages').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('lastCron').to.not.be.empty
+	expect(res.body).to.have.property('items').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('invitations').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('history').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('flags').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('purchased').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('filters').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('balance').to.equal(0)
+	expect(res.body).to.have.property('contributor').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('backer').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('auth').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('achievements').to.be.instanceOf(Object)
+	expect(res.body).to.have.property('_id').to.equal('aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee')
+	done();
+      });
+
+    });
     it("puts to update the user object (only certain attributes are supported)");
     it("deletes a user object entirely");
     it("posts to revive your dead user");
@@ -190,9 +223,73 @@ describe('HabitRPG API V2 Tests', function() {
     it("posts to cancel subscription - NOT SUPPORTED");
     it("posts to buy gems with paypal - NOT SUPPORTED");
     it("posts to batch update a user");
-    it("posts to create a new tag");
-    it("puts to edit a tag");
-    it("deletes a tag");
+    it("posts to create a new tag", function(done) {
+      var tag = {
+	name: 'habitrpg-api'
+      };
+      api.user.createTag(tag, function(error, res) {
+        expect(error).to.not.exist;
+        expect(res.statusCode).to.equal(200);
+        expect(res.body).to.have.length.of(1);
+        expect(res.body[0]).to.have.property('name').and.to.equal(tag.name);
+        expect(res.body[0]).to.have.property('id').and.to.not.be.empty;
+        tagId = res.body[0].id;
+        done();
+      });
+    });
+    it("gets a tag by name", function(done) {
+      var tagName = "habitrpg-api"
+      api.user.getTagByName(tagName, function(error, res) {
+	expect(error).to.not.exist;
+	expect(res.statusCode).to.equal(200);
+	expect(res.body).to.be.an.instanceOf(Object);
+	expect(res.body).to.have.property('name').and.to.equal(tagName);
+	expect(res.body).to.have.property('id').and.to.equal(tagId);
+	done();
+      });
+    });
+    it("gets a tag by id", function(done) {
+      api.user.getTag(tagId, function(error, res) {
+	expect(error).to.not.exist;
+	expect(res.statusCode).to.equal(200);
+	expect(res.body).to.be.an.instanceOf(Object);
+	expect(res.body).to.have.property('name').and.to.equal('habitrpg-api');
+	expect(res.body).to.have.property('id').and.to.equal(tagId);
+	done();
+      });
+    });
+    it("gets a list of tags", function(done) {
+      api.user.getTags(function(error, res) {
+	expect(error).to.not.exist;
+	expect(res.statusCode).to.equal(200);
+	expect(res.body).to.be.an.instanceOf(Array);
+	expect(res.body).to.have.length(1);
+	expect(res.body[0]).to.have.property('name').and.to.equal('habitrpg-api');
+	expect(res.body[0]).to.have.property('id').and.to.equal(tagId);
+	done();
+      });
+    });
+    it("puts to edit a tag", function(done) {
+      tag = {
+	name: 'updated-tag'
+      };
+
+      api.user.updateTag(tagId, tag, function(error, res) {
+	expect(error).to.not.exist;
+	expect(res.statusCode).to.equal(200);
+	expect(res.body).to.have.property('name').and.to.equal(tag.name);
+	expect(res.body).to.have.property('id').and.to.equal(tagId);
+	done();
+      });
+    });
+    it("deletes a tag", function(done) {
+      api.user.deleteTag(tagId, function(error, res) {
+	expect(error).to.not.exist;
+	expect(res.statusCode).to.equal(200);
+	expect(res.body).to.have.length.of(0);
+	done();
+      });
+    });
   });
 
   describe('Groups API', function(){

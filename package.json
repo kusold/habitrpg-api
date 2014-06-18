@@ -24,6 +24,7 @@
     "habitrpg": "git://github.com/HabitRPG/habitrpg.git#develop"
   },
   "dependencies": {
-    "superagent": "~0.17.0"
+    "superagent": "~0.17.0",
+    "lodash": "~2.4.1"
   }
 }
