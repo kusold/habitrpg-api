@@ -16,7 +16,8 @@
     "url": "https://github.com/Kusold/habitrpg-api"
   },
   "bugs": {
-    "url": "https://github.com/Kusold/habitrpg-api/issues"
+    "url": "https://github.com/Kusold/habitrpg-api/issues",
+    "email": "hello@mikekusold.com"
   },
   "license": "GPL v3",
   "devDependencies": {
