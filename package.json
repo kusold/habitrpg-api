@@ -11,6 +11,13 @@
     "habitrpg"
   ],
   "author": "Mike Kusold",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kusold/habitrpg-api"
+  },
+  "bugs": {
+    "url": "https://github.com/Kusold/habitrpg-api/issues"
+  },
   "license": "GPL v3",
   "devDependencies": {
     "chai": "~1.9.1",
