@@ -1,5 +1,6 @@
 habitrpg-api
 ============
+[![Build Status](https://travis-ci.org/Kusold/habitrpg-api.svg?branch=master)](https://travis-ci.org/Kusold/habitrpg-api)
 
 NPM module that wraps the habitrpg-api in an easy to use format.
 

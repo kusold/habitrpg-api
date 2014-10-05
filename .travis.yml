@@ -10,7 +10,7 @@ before_script:
   - npm install grunt-karma git-changelog
   - cp config.json.example config.json
   - npm start &
-  - sleep 10
+  - sleep 20
   - node ./src/seed.js
   - popd
   - ./seedHabitRPGMongo.sh
