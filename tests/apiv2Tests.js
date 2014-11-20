@@ -126,7 +126,7 @@ describe('HabitRPG API V2 Tests', function() {
       });
     });
 
-    it("posts an increase or decrease to user's task score", function(done) {
+    it("posts a decrease to user's task score", function(done) {
       var increment = true;
       api.user.updateTaskScore(taskId, increment, function(error, res) {
         expect(error).to.not.exist;
