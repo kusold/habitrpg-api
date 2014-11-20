@@ -161,3 +161,29 @@ Gets the user history for export
 ```javascript
 .getHisory(function(response, error){})
 ```
+
+# Testing #
+Clone the [HabitRPG Repo](https://github.com/HabitRPG/habitrpg/) and follow the [setup instructions](http://habitrpg.wikia.com/wiki/Guidance_for_Blacksmiths).
+
+In the habitrpg-api repo, copy the `config.example.js` file to `config.js` and fill in the `userId` and `apiKey` in the `apiSettings` object for your user on your local copy of HabitRPG.
+
+``` bash
+cp config.example.js config.js
+```
+
+``` js
+var apiSettings = {
+  apiKey: 'ReplaceThisWithYourAPIToken',
+  userId: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
+};
+```
+
+Start up the local copy of HabitRPG. And run this command:
+
+``` bash
+gulp watch
+```
+
+Adjust the lib and test files as needed.
+
+
