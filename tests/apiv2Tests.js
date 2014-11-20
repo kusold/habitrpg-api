@@ -126,12 +126,12 @@ describe('HabitRPG API V2 Tests', function() {
       });
     });
 
-    it("posts a decrease to user's task score", function(done) {
+    it("posts an increase or decrease to user's task score", function(done) {
       var increment = true;
       api.user.updateTaskScore(taskId, increment, function(error, res) {
         expect(error).to.not.exist;
         expect(res).to.have.property('statusCode').and.to.equal(200);
-        expect(res.body).to.have.property('delta').and.to.equal(1);
+        expect(res.body).to.have.property('delta').and.to.be.above(0);
 
         api.user.getTask(taskId, function(error, res) {
           expect(res.body).to.have.property('value').to.equal(1);
