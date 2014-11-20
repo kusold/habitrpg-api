@@ -185,5 +185,3 @@ gulp watch
 ```
 
 Adjust the lib and test files as needed.
-
-
