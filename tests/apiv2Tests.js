@@ -293,7 +293,13 @@ describe('HabitRPG API V2 Tests', function() {
   });
 
   describe('Groups API', function(){
-    it("gets a list of groups");
+    it("gets a list of groups", function(done) {
+      api.getGroups(function(error, res) {
+        expect(error).to.not.exist;
+        expect(res.statusCode).to.equal(200);
+        done();
+      });
+    });
     it("posts to create a group");
     it("gets a group");
     it("posts to edit a group");
