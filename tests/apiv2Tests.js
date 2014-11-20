@@ -224,6 +224,7 @@ describe('HabitRPG API V2 Tests', function() {
     it("posts to buy gems with paypal - NOT SUPPORTED");
     it("posts to batch update a user");
     it("posts to create a new tag", function(done) {
+      // @TODO Rewrite so it doesn't assume user has no tags to begin with
       var tag = {
         name: 'habitrpg-api'
       };
