@@ -198,12 +198,12 @@ describe('HabitRPG API V2 Tests', function() {
         expect(res.body).to.have.property('flags').to.be.instanceOf(Object);
         expect(res.body).to.have.property('purchased').to.be.instanceOf(Object);
         expect(res.body).to.have.property('filters').to.be.instanceOf(Object);
-        expect(res.body).to.have.property('balance').to.equal(0);
+        expect(res.body).to.have.property('balance').to.be.at.least(0);
         expect(res.body).to.have.property('contributor').to.be.instanceOf(Object);
         expect(res.body).to.have.property('backer').to.be.instanceOf(Object);
         expect(res.body).to.have.property('auth').to.be.instanceOf(Object);
         expect(res.body).to.have.property('achievements').to.be.instanceOf(Object);
-        expect(res.body).to.have.property('_id').to.equal('aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee');
+        expect(res.body).to.have.property('_id').to.equal(apiConfig.userId);
         done();
       });
 
