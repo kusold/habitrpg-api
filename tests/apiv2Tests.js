@@ -297,6 +297,13 @@ describe('HabitRPG API V2 Tests', function() {
       api.getGroups(function(error, res) {
         expect(error).to.not.exist;
         expect(res.statusCode).to.equal(200);
+        expect(res.body).to.be.instanceOf(Array);
+        expect(res.body).to.have.length.above(0);
+        expect(res.body[0]).to.have.property('_id');
+        expect(res.body[0]).to.have.property('name');
+        expect(res.body[0]).to.have.property('leader');
+        expect(res.body[0]).to.have.property('quest').to.be.instanceOf(Object);
+        expect(res.body[0]).to.have.property('memberCount');
         done();
       });
     });
