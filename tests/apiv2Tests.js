@@ -311,6 +311,21 @@ describe('HabitRPG API V2 Tests', function() {
         done();
       });
     });
+    it("gets a list of groups by type", function(done) {
+      var type = "tavern";
+      api.getGroupsByType(type, function(error, res) {
+        expect(error).to.not.exist;
+        expect(res.statusCode).to.equal(200);
+        expect(res.body).to.be.instanceOf(Array);
+        expect(res.body).to.have.length.above(0);
+        expect(res.body[0]).to.have.property('_id');
+        expect(res.body[0]).to.have.property('name');
+        expect(res.body[0]).to.have.property('leader');
+        expect(res.body[0]).to.have.property('quest').to.be.instanceOf(Object);
+        expect(res.body[0]).to.have.property('memberCount');
+        done();
+      });
+    });
     it("posts to create a group");
     it("gets a group", function(done) {
       api.getGroup(groupId, function(error, res) {
