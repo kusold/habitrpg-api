@@ -293,10 +293,14 @@ describe('HabitRPG API V2 Tests', function() {
   });
 
   describe('Groups API', function(){
+    var groupId = null;
+
     it("gets a list of groups", function(done) {
       api.getGroups(function(error, res) {
         expect(error).to.not.exist;
         expect(res.statusCode).to.equal(200);
+        // Saves first group in array for use in later tests
+        groupId = res.body[0]._id;
         expect(res.body).to.be.instanceOf(Array);
         expect(res.body).to.have.length.above(0);
         expect(res.body[0]).to.have.property('_id');
@@ -308,7 +312,19 @@ describe('HabitRPG API V2 Tests', function() {
       });
     });
     it("posts to create a group");
-    it("gets a group");
+    it("gets a group", function(done) {
+      api.getGroup(groupId, function(error, res) {
+        expect(error).to.not.exist;
+        expect(res.statusCode).to.equal(200);
+        expect(res.body).to.have.property('_id');
+        expect(res.body).to.have.property('name');
+        expect(res.body).to.have.property('leader');
+        expect(res.body).to.have.property('quest').to.be.instanceOf(Object);
+        expect(res.body).to.have.property('memberCount');
+        done();
+      });
+    });
+
     it("posts to edit a group");
     it("posts to join a group");
     it("posts to leave a group");
