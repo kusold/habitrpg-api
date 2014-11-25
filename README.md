@@ -13,6 +13,7 @@ NPM module that wraps the habitrpg-api in an easy to use format.
   - [User](#user)
     - [Tasks](#tasks)
     - [Tags](#tags)
+  - [Groups](#groups)
   - [Miscellaneous](#miscellaneous)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -131,6 +132,29 @@ Deletes a tag
 ```javascript
 .user.deleteTag(id, function(response, error){})
 ```
+
+## Groups ##
+**GET /groups**
+
+Gets a list of all groups
+```javascript
+.getGroups(function(response, error){})
+```
+
+**GET /groups?type=**
+
+Gets a list of all groups of a certain type
+```javascript
+.getGroupsByType("comma,seperated,string", function(response, error){})
+```
+
+**GET /groups/:id**
+
+Gets an individual group
+```javascript
+.getGroup(id, function(response, error){})
+```
+
 
 ## Miscellaneous ##
 
