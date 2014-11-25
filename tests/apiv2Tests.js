@@ -131,7 +131,7 @@ describe('HabitRPG API V2 Tests', function() {
       api.user.updateTaskScore(taskId, increment, function(error, res) {
         expect(error).to.not.exist;
         expect(res).to.have.property('statusCode').and.to.equal(200);
-        expect(res.body).to.have.property('delta').and.to.equal(1);
+        expect(res.body).to.have.property('delta').and.to.be.above(0);
 
         api.user.getTask(taskId, function(error, res) {
           expect(res.body).to.have.property('value').to.equal(1);
@@ -198,12 +198,12 @@ describe('HabitRPG API V2 Tests', function() {
         expect(res.body).to.have.property('flags').to.be.instanceOf(Object);
         expect(res.body).to.have.property('purchased').to.be.instanceOf(Object);
         expect(res.body).to.have.property('filters').to.be.instanceOf(Object);
-        expect(res.body).to.have.property('balance').to.equal(0);
+        expect(res.body).to.have.property('balance').to.be.at.least(0);
         expect(res.body).to.have.property('contributor').to.be.instanceOf(Object);
         expect(res.body).to.have.property('backer').to.be.instanceOf(Object);
         expect(res.body).to.have.property('auth').to.be.instanceOf(Object);
         expect(res.body).to.have.property('achievements').to.be.instanceOf(Object);
-        expect(res.body).to.have.property('_id').to.equal('aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee');
+        expect(res.body).to.have.property('_id').to.equal(apiConfig.userId);
         done();
       });
 
@@ -224,6 +224,7 @@ describe('HabitRPG API V2 Tests', function() {
     it("posts to buy gems with paypal - NOT SUPPORTED");
     it("posts to batch update a user");
     it("posts to create a new tag", function(done) {
+      // @TODO Rewrite so it doesn't assume user has no tags to begin with
       var tag = {
         name: 'habitrpg-api'
       };
