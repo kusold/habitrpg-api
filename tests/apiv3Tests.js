@@ -8,25 +8,14 @@ var apiUrl = Config.apiHostUrl(config);
 
 /* jshint expr:true */
 
-describe('HabitRPG API V2 Tests', function() {
+describe('HabitRPG API V3 Tests', function() {
   var api = null;
 
   before(function(done) {
     expect(apiConfig.apiKey).to.exist.and.to.not.be.empty;
     expect(apiConfig.userId).to.exist.and.to.not.be.empty;
-    api = new HabitRPG(apiConfig.userId, apiConfig.apiKey, apiUrl);
+    api = new HabitRPG(apiConfig.userId, apiConfig.apiKey, apiUrl, 'v2');
     done();
-  });
-
-  it('gets the api docs', function (done) {
-    api.getApiDocs(function(error, res) {
-        expect(error).to.not.exist;
-        expect(res).to.exist;
-        expect(res.statusCode).to.equal(200);
-        // Currently this API Endpoint doesn't return anything
-        expect(res.body).to.be.empty;
-        done();
-    });
   });
 
   it('gets the api server status', function (done) {
@@ -93,7 +82,7 @@ describe('HabitRPG API V2 Tests', function() {
       api.user.createTask(task, function(error, res) {
         expect(error).to.not.exist;
         expect(res).to.exist;
-        expect(res.statusCode).to.equal(200);
+        expect(res.statusCode).to.equal(201);
         expect(res.body).to.have.property('text').to.equal('Test Task');
         expect(res.body).to.have.property('notes').to.equal('Notes for Task');
         expect(res.body).to.have.property('type').to.equal('todo');
@@ -180,10 +169,11 @@ describe('HabitRPG API V2 Tests', function() {
         expect(error).to.not.exist;
         expect(res).to.exist;
         expect(res.statusCode).to.equal(200);
-        expect(res.body).to.have.property('rewards').to.be.instanceOf(Array);
-        expect(res.body).to.have.property('todos').to.be.instanceOf(Array);
-        expect(res.body).to.have.property('dailys').to.be.instanceOf(Array);
-        expect(res.body).to.have.property('habits').to.be.instanceOf(Array);
+        expect(res.body).to.have.property('tasksOrder').to.be.instanceOf(Object);
+        expect(res.body.tasksOrder).to.have.property('rewards').to.be.instanceOf(Array);
+        expect(res.body.tasksOrder).to.have.property('todos').to.be.instanceOf(Array);
+        expect(res.body.tasksOrder).to.have.property('dailys').to.be.instanceOf(Array);
+        expect(res.body.tasksOrder).to.have.property('habits').to.be.instanceOf(Array);
         expect(res.body).to.have.property('challenges').to.be.instanceOf(Array);
         expect(res.body).to.have.property('tags').to.be.instanceOf(Array);
         expect(res.body).to.have.property('stats').to.be.instanceOf(Object);
@@ -197,7 +187,6 @@ describe('HabitRPG API V2 Tests', function() {
         expect(res.body).to.have.property('history').to.be.instanceOf(Object);
         expect(res.body).to.have.property('flags').to.be.instanceOf(Object);
         expect(res.body).to.have.property('purchased').to.be.instanceOf(Object);
-        expect(res.body).to.have.property('filters').to.be.instanceOf(Object);
         expect(res.body).to.have.property('balance').to.be.at.least(0);
         expect(res.body).to.have.property('contributor').to.be.instanceOf(Object);
         expect(res.body).to.have.property('backer').to.be.instanceOf(Object);
@@ -230,7 +219,7 @@ describe('HabitRPG API V2 Tests', function() {
       };
       api.user.createTag(tag, function(error, res) {
         expect(error).to.not.exist;
-        expect(res.statusCode).to.equal(200);
+        expect(res.statusCode).to.equal(201);
         expect(res.body).to.have.length.of(1);
         expect(res.body[0]).to.have.property('name').and.to.equal(tag.name);
         expect(res.body[0]).to.have.property('id').and.to.not.be.empty;
@@ -287,7 +276,7 @@ describe('HabitRPG API V2 Tests', function() {
       api.user.deleteTag(tagId, function(error, res) {
         expect(error).to.not.exist;
         expect(res.statusCode).to.equal(200);
-        expect(res.body).to.have.length.of(0);
+        expect(res.body).exist;
         done();
       });
     });
@@ -307,7 +296,6 @@ describe('HabitRPG API V2 Tests', function() {
         expect(res.body[0]).to.have.property('_id');
         expect(res.body[0]).to.have.property('name');
         expect(res.body[0]).to.have.property('leader');
-        expect(res.body[0]).to.have.property('quest').to.be.instanceOf(Object);
         expect(res.body[0]).to.have.property('memberCount');
         done();
       });

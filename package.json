@@ -2,7 +2,7 @@
   "name": "habitrpg-api",
   "version": "0.1.2",
   "description": "A Javascript wrapper for the HabitRPG api.",
-  "main": "lib/apiv2.js",
+  "main": "lib/apiv3.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha tests/*",
     "lint": "./node_modules/.bin/gulp lint"

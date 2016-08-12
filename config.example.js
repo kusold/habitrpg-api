@@ -6,7 +6,7 @@ var apiSettings = {
 var config = {
   host: 'localhost',
   port: 3000,
-  apiUrl: '/api/v2'
+  apiUrl: '/api/v3'
 };
 
 function apiHostUrl(config) {
