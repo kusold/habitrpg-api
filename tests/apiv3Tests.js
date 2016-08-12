@@ -1,6 +1,6 @@
 var _ = require('underscore');
 var expect = require('chai').expect;
-var HabitRPG = require('../lib/apiv2.js');
+var HabitRPG = require('../lib/apiv3.js');
 var Config = require('../config');
 var apiConfig = Config.apiSettings;
 var config = Config.config;
