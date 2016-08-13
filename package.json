@@ -1,6 +1,6 @@
 {
   "name": "habitrpg-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Javascript wrapper for the HabitRPG api.",
   "main": "lib/apiv3.js",
   "scripts": {
