@@ -1,6 +1,6 @@
 {
   "name": "habitrpg-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Javascript wrapper for the HabitRPG api.",
   "main": "lib/apiv3.js",
   "scripts": {
@@ -20,8 +20,8 @@
     "email": "hello@mikekusold.com"
   },
   "license": "GPL v3",
-  "engines" : {
-    "node" : ">=4.0.0"
+  "engines": {
+    "node": ">=4.0.0"
   },
   "devDependencies": {
     "chai": "~1.9.1",
