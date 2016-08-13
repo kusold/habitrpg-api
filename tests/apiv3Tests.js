@@ -79,7 +79,7 @@ describe('HabitRPG API V3 Tests', function() {
         type: 'todo'
       };
 
-      api.user.createTask(task, function(error, res) {
+      api.createTask(task, function(error, res) {
         expect(error).to.not.exist;
         expect(res).to.exist;
         expect(res.statusCode).to.equal(201);
@@ -92,7 +92,7 @@ describe('HabitRPG API V3 Tests', function() {
     });
 
     it("gets an individual task", function(done) {
-      api.user.getTask(taskId, function(error, res) {
+      api.getTask(taskId, function(error, res) {
         expect(error).to.not.exist;
         expect(res).to.exist;
         expect(res.statusCode).to.equal(200);
@@ -105,7 +105,7 @@ describe('HabitRPG API V3 Tests', function() {
     });
 
     it("gets all user's tasks", function(done) {
-      api.user.getTasks(function(error, res) {
+      api.getTasks(function(error, res) {
         expect(error).to.not.exist;
         expect(res).to.have.property('statusCode').and.to.equal(200);
         expect(res.body).to.not.be.empty;
@@ -117,14 +117,14 @@ describe('HabitRPG API V3 Tests', function() {
 
     it("posts an increase or decrease to user's task score", function(done) {
       var increment = true;
-      api.user.updateTaskScore(taskId, increment, function(error, res) {
+      api.updateTaskScore(taskId, increment, function(error, res) {
         expect(error).to.not.exist;
         expect(res).to.have.property('statusCode').and.to.equal(200);
         expect(res.body).to.have.property('delta').and.to.be.above(0);
 
-        api.user.getTask(taskId, function(error, res) {
+        api.getTask(taskId, function(error, res) {
           expect(res.body).to.have.property('value').to.equal(1);
-          api.user.updateTaskScore(taskId, 'down', function(error, res) {
+          api.updateTaskScore(taskId, 'down', function(error, res) {
             expect(error).to.not.exist;
             expect(res.statusCode).to.equal(200);
             expect(res.body.delta).to.be.lessThan(1);
@@ -136,7 +136,7 @@ describe('HabitRPG API V3 Tests', function() {
 
     it("puts a user's task to update", function(done) {
       var task = {text: 'Test Task Updated'};
-      api.user.updateTask(taskId, task, function(error, res) {
+      api.updateTask(taskId, task, function(error, res) {
         expect(error).to.not.exist;
         expect(res).to.exist;
         expect(res.statusCode).to.equal(200);
@@ -147,7 +147,7 @@ describe('HabitRPG API V3 Tests', function() {
       });
     });
     it("deletes a task", function(done) {
-        api.user.deleteTask(taskId, function(error, res) {
+        api.deleteTask(taskId, function(error, res) {
           expect(error).to.not.exist;
           expect(res).to.exist;
           expect(res.statusCode).to.equal(200);
@@ -165,7 +165,7 @@ describe('HabitRPG API V3 Tests', function() {
     it("posts to equip an item (either pets, mounts, or gear)");
     it("posts to pour a hatching potion on an egg");
     it("gets the full user object", function (done) {
-      api.user.getUser(function(error, res) {
+      api.getUser(function(error, res) {
         expect(error).to.not.exist;
         expect(res).to.exist;
         expect(res.statusCode).to.equal(200);
@@ -217,7 +217,7 @@ describe('HabitRPG API V3 Tests', function() {
       var tag = {
         name: 'habitrpg-api'
       };
-      api.user.createTag(tag, function(error, res) {
+      api.createTag(tag, function(error, res) {
         expect(error).to.not.exist;
         expect(res.statusCode).to.equal(201);
         expect(res.body).to.have.length.of(1);
@@ -229,7 +229,7 @@ describe('HabitRPG API V3 Tests', function() {
     });
     it("gets a tag by name", function(done) {
       var tagName = "habitrpg-api";
-      api.user.getTagByName(tagName, function(error, res) {
+      api.getTagByName(tagName, function(error, res) {
         expect(error).to.not.exist;
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.an.instanceOf(Object);
@@ -239,7 +239,7 @@ describe('HabitRPG API V3 Tests', function() {
       });
     });
     it("gets a tag by id", function(done) {
-      api.user.getTag(tagId, function(error, res) {
+      api.getTag(tagId, function(error, res) {
         expect(error).to.not.exist;
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.an.instanceOf(Object);
@@ -249,7 +249,7 @@ describe('HabitRPG API V3 Tests', function() {
       });
     });
     it("gets a list of tags", function(done) {
-      api.user.getTags(function(error, res) {
+      api.getTags(function(error, res) {
         expect(error).to.not.exist;
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.an.instanceOf(Array);
@@ -264,7 +264,7 @@ describe('HabitRPG API V3 Tests', function() {
         name: 'updated-tag'
       };
 
-      api.user.updateTag(tagId, tag, function(error, res) {
+      api.updateTag(tagId, tag, function(error, res) {
         expect(error).to.not.exist;
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.have.property('name').and.to.equal(tag.name);
@@ -273,7 +273,7 @@ describe('HabitRPG API V3 Tests', function() {
       });
     });
     it("deletes a tag", function(done) {
-      api.user.deleteTag(tagId, function(error, res) {
+      api.deleteTag(tagId, function(error, res) {
         expect(error).to.not.exist;
         expect(res.statusCode).to.equal(200);
         expect(res.body).exist;
